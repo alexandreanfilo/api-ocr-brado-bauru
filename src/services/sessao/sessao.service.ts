@@ -1,7 +1,7 @@
-import { Sessao } from './../../Mongo/Interfaces/sessao.interface';
-import { SessaoDTO } from './../../DTO/sessao.dto';
+import { Sessao } from '../../Mongo/Interfaces/sessao/sessao.interface';
+import { SessaoDTO } from '../../DTO/sessao/sessao.dto';
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { SessaoRepository } from 'src/Mongo/Repository/sessao.repository';
+import { SessaoRepository } from 'src/Mongo/Repository/sessao/sessao.repository';
 import { promises } from 'dns';
 
 @Injectable()
@@ -69,24 +69,48 @@ export class SessaoService {
         }
     }
 
-    async buscaSessaoPlaca(placaFrontal: string): Promise<Sessao[]>{
 
-        const sessaoEncontrada = await this.sessaoRepository.buscaSessaoPlaca(placaFrontal);
+    async buscaSessaoData(query : object): Promise <Sessao[]>{
+        
+            
+        try {
+            const sucesso = await this.sessaoRepository.buscaSessaoData(query);
 
-        if(!sessaoEncontrada.length){
-            throw new BadRequestException('Sem Registros');
+            if(!sucesso){
+                throw new BadRequestException ('Sem nenhum Resultado');
+            }
+
+            return sucesso;
+        } catch (e) {
+            throw new BadRequestException ('Sem nenhum Resultado');
         }
-        return sessaoEncontrada;
+     
+        
     }
 
-    async buscaSessaoData(data: string): Promise <Sessao[]>{
-         
-        const sessaoEncontrada = await this.sessaoRepository.buscaSessaoData(data);
+    async buscaSessaoPeriodo(query : object ): Promise <Sessao[]>{
+            
+        try {
+            const sucesso = await this.sessaoRepository.buscaSessaoPeriodo(query);
 
-        if (!sessaoEncontrada.length){
-                throw new BadRequestException('Sem Registro');
+            if(!sucesso){
+                throw new BadRequestException ('Sem nenhum Resultado');
+            }
+            return sucesso;
+        } catch (e) {
+            throw new BadRequestException (e);
+        }
+     
+    }
+
+    async allRegister(): Promise <Sessao> {
+        
+        const todosRegistros = await this.sessaoRepository.allRegister();
+    
+        if (!todosRegistros) {
+            throw new BadRequestException ('Database is empty');
         }
 
-        return sessaoEncontrada;
+        return todosRegistros;
     }
 }

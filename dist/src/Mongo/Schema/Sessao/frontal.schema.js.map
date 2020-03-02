@@ -1,0 +1,1 @@
+{"version":3,"file":"frontal.schema.js","sourceRoot":"","sources":["../../../../../src/Mongo/Schema/Sessao/frontal.schema.ts"],"names":[],"mappings":";;AAAA,uCAAkC;AAErB,QAAA,aAAa,GAAG,IAAI,iBAAM,CAAE;IAErC,SAAS,EAAO,MAAM;IACtB,UAAU,EAAM,MAAM;IACtB,SAAS,EAAO,MAAM;IACtB,GAAG,EAAa,MAAM;IACtB,KAAK,EAAW,OAAO;IACvB,SAAS,EAAO,MAAM;CAEzB,CAAC,CAAA"}
